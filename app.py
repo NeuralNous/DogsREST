@@ -48,7 +48,10 @@ def classify():
     img = PIL.Image.open(urlopen(link))
     img = img.resize((256, 256), PIL.Image.ANTIALIAS)
     ans = model.predict(numpy.array(img.getdata()).reshape(1, 256, 256, 3))
-    return str(ans)
+    print(ans[0])
+    if ans[0][1] > 0.6 and ans[0][0] < ans[0][1]:
+        return str(1)
+    return str(0)
 
 
 if __name__ == '__main__':
